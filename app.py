@@ -11,17 +11,14 @@ app.config['DEBUG'] = False
 
 GOOGLE_BOOKS_API_KEY = os.getenv('GOOGLE_BOOKS_API_KEY')
 
-# Route untuk static files
 @app.route('/static/<path:filename>')
 def serve_static(filename):
     return send_from_directory('static', filename)
 
-# Route utama
 @app.route('/')
 def home():
     return render_template('index.html')
 
-# API Search
 @app.route('/api/search', methods=['GET', 'POST'])
 def search_books():
     if request.method == 'POST':
@@ -48,7 +45,8 @@ def search_books():
             book_info = {
                 "title": item['volumeInfo'].get('title', 'No title'),
                 "authors": ", ".join(item['volumeInfo'].get('authors', ['Unknown'])),
-                "thumbnail": item['volumeInfo'].get('imageLinks', {}).get('thumbnail', url_for('static', filename='images/book-placeholder.jpg')),
+                "thumbnail": item['volumeInfo'].get('imageLinks', {}).get('thumbnail', 
+                           url_for('static', filename='images/book-placeholder.jpg')),
                 "preview_link": item['volumeInfo'].get('previewLink', '#')
             }
             books.append(book_info)
@@ -58,5 +56,6 @@ def search_books():
     except Exception as e:
         return jsonify({"error": str(e)}), 500
 
+
 if __name__ == '__main__':
-    app.run(host='0.0.0.0', port=int(os.environ.get('PORT', 5000)))
+    app.run(debug=True)

@@ -4,53 +4,18 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Perpustakaan Digital</title>
-    <!-- TailwindCSS -->
+    <!-- Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com"></script>
     <!-- Font Awesome -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <!-- Custom CSS -->
-    <link rel="stylesheet" href="../static/css/style.css" >
-    <!-- Custom Tailwind Config -->
-    <script>
-        tailwind.config = {
-            theme: {
-                extend: {
-                    colors: {
-                        'library-primary': '#4F46E5',
-                        'library-secondary': '#10B981',
-                    }
-                }
-            }
-        }
-    </script>
+    <link href="{{ url_for('static', filename='css/style.css') }}" rel="stylesheet">
 </head>
 <body class="bg-gradient-to-br from-gray-50 to-blue-50 min-h-screen">
-    <!-- Navbar -->
-    <nav class="bg-library-primary text-white shadow-lg">
-        <div class="container mx-auto px-4 py-3 flex justify-between items-center">
-            <div class="flex items-center space-x-2">
-                <i class="fas fa-book-open text-2xl"></i>
-                <h1 class="text-xl font-bold">Perpustakaan Digital</h1>
-            </div>
-            <div class="hidden md:flex space-x-6">
-                <a href="/" class="hover:text-yellow-200 transition"><i class="fas fa-home mr-1"></i> Beranda</a>
-                <a href="#" class="hover:text-yellow-200 transition"><i class="fas fa-info-circle mr-1"></i> Tentang</a>
-            </div>
-        </div>
-    </nav>
-
-    <!-- Main Content -->
+    {% include "partials/_navbar.html" %}
     <div class="container mx-auto px-4 py-8">
         {% block content %}{% endblock %}
     </div>
-
-    <!-- Footer -->
-    <footer class="bg-library-primary text-white py-6 mt-12">
-        <div class="container mx-auto px-4 text-center">
-            <p>© 2025 Perpustakaan Digital. All rights reserved.</p>
-        </div>
-    </footer>
-
     <script src="{{ url_for('static', filename='js/script.js') }}"></script>
 </body>
 </html>
