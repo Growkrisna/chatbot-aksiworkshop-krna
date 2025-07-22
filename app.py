@@ -1,4 +1,4 @@
-from flask import Flask, render_template, request, jsonify
+from flask import Flask, render_template, request, jsonify, send_from_directory
 import requests
 import os
 from dotenv import load_dotenv
@@ -44,4 +44,6 @@ if __name__ == '__main__':
     app.debug = True
     app.run()
     
-    
+@app.route('/static/<path:filename>')
+def serve_static(filename):
+    return send_from_directory('static', filename)
