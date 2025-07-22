@@ -1,0 +1,5 @@
+# Flask/Vercel Minimal
+__pycache__/
+.env
+.venv/
+*.pyc
