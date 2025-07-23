@@ -59,3 +59,13 @@ def search_books():
 
 if __name__ == '__main__':
     app.run(debug=True)
+    
+    # Untuk handle static files di Vercel
+@app.route('/<path:path>')
+def catch_all(path):
+    if path.startswith('static/'):
+        return send_from_directory('', path)
+    return render_template('index.html')
+
+if __name__ == '__main__':
+    app.run()
